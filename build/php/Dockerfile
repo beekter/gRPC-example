@@ -23,9 +23,7 @@ RUN { \
         echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/php-opocache-cfg.ini
 
-COPY --chown=www-data:wwww-data image-files/nginx/default.conf /etc/nginx/nginx.conf
-#COPY --chown=www-data:wwww-data image-files/www.conf /usr/local/etc/php-fpm.d/www.conf
-#COPY --chown=www-data:wwww-data image-files/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY --chown=www-data:wwww-data nginx/default.conf /etc/nginx/nginx.conf
 COPY --chown=www-data:www-data entrypoint.sh /etc/entrypoint.sh
 
 RUN mkdir /app && chown -R www-data:www-data /app
