@@ -9,7 +9,7 @@ use Version1\Request;
 $request = new Request();
 $request->mergeFromString(file_get_contents('php://input'));
 
-if (($_SERVER['REQUEST_URI'] ?? "") === '/search') {
+if (($_SERVER['PATH_INFO'] ?? "") === '/search') {
     $response = (new SearchService())->searchFav($request);
 
     echo str_replace("\n", "<br>", $response->serializeToString());

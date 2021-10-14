@@ -1,4 +1,3 @@
-
 FROM beekter/php:8.0-fpm-grpc
 RUN apt-get update -y \
     && apt-get install -y nginx
@@ -24,8 +23,10 @@ RUN { \
         echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/php-opocache-cfg.ini
 
-COPY --chown=www-data:wwww-data ./image-files/default.conf /etc/nginx/nginx.conf
-COPY --chown=www-data:www-data ./image-files/entrypoint.sh /etc/entrypoint.sh
+COPY --chown=www-data:wwww-data image-files/nginx/default.conf /etc/nginx/nginx.conf
+#COPY --chown=www-data:wwww-data image-files/www.conf /usr/local/etc/php-fpm.d/www.conf
+#COPY --chown=www-data:wwww-data image-files/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY --chown=www-data:www-data entrypoint.sh /etc/entrypoint.sh
 
 RUN mkdir /app && chown -R www-data:www-data /app
 
